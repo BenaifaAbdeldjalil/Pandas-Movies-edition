@@ -51,7 +51,7 @@ ghibli-data-pipeline/
 
 ```bash
 python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
+.\venv\Scripts\activate       # Windows: venv\Scripts\activate
 ```
 
 `requirements.txt`:
@@ -60,6 +60,11 @@ requests
 pandas
 pyarrow
 ```
+
+echo requests >> requirements.txt
+pandas >> requirements.txt  
+pyarrow   python-dotenv >> requirements.txt
+
 
 ```bash
 pip install -r requirements.txt
