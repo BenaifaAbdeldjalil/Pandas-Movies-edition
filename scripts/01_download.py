@@ -5,9 +5,10 @@ import pandas as pd
 base = "https://ghibli-api.vercel.app/"
 endpoint = "api/films"
 
-url = base.join(endpoint)
+#url contruction 
+url = base.rstrip("/") + "/" + endpoint.lstrip("/")
 
-print(url)
+print(f"ursl is {url}")
 
 
 
