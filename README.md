@@ -1,4 +1,4 @@
-# Ghibli Data Pipeline
+# Pandas Movies edition : Ghibli Data Pipeline
 
 A small Python/pandas pipeline that fetches all Studio Ghibli films from
 the free, no-auth [Ghibli API](https://ghibli-api.vercel.app/), cleans the
