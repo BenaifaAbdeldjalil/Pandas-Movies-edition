@@ -1,14 +1,9 @@
-# -*- coding: utf-8 -*- 
-import requests
-import pandas as pd
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parents[1]))
 
-base = "https://ghibli-api.vercel.app/"
-endpoint = "api/films"
+from src.download import fetch_data,save_data
 
-#url contruction 
-url = base.rstrip("/") + "/" + endpoint.lstrip("/")
-
-print(f"ursl is {url}")
-
-
-
+films = fetch_data()
+save_data(films)
+print(f"Saved {len(films)} films.")
