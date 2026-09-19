@@ -5,16 +5,16 @@ import json
 
 
 
-def fetch_data(url,base,max_retries: int = 3):
-    base = base.rstrip("/") + "/" 
+def fetch_data(url,max_retries: int = 3):
+    
     for attempt in range(1, max_retries + 1):
         try:
 
-            response = rq.get(url, timeout=30,)
+            response = rq.get(url, timeout=30)
                         # Vérifier que la requête a réussi
-            print(response.raise_for_status())
                             # Écrire directement la réponse JSON dans un fichier
-            pass
+            return response
+            break
         except rq.exceptions.HTTPError as e:
             print(f"❌ Erreur HTTP : {e}")
         except rq.exceptions.Timeout:
@@ -23,7 +23,11 @@ def fetch_data(url,base,max_retries: int = 3):
             print(f"❌ Erreur réseau : {e}")
         except OSError as e:
             print(f"❌ Erreur d'écriture fichier : {e}")
-    raise RuntimeError("Failed to fetch data after retries")
+            break
+    else:
+        raise RuntimeError(
+            f"Échec de la récupération après {max_retries} tentatives"
+        )
 
 
 def save_data(data,path):
