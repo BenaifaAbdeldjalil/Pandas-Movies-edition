@@ -14,7 +14,7 @@ and a simple raw/processed/final data pipeline layout — no API key needed.
 ## Project structure
 
 ```
-ghibli-data-pipeline/
+Pandas-Movies-edition/
 ├── data/
 │   ├── raw/                  # untouched API response (gitignored)
 │   ├── processed/            # cleaned CSV + Parquet (gitignored)
