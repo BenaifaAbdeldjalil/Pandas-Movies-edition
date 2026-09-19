@@ -69,8 +69,21 @@ pyarrow   python-dotenv >> requirements.txt
 
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt 
+or 
+.\venv\Scripts\python.exe -m pip install requests
 ```
+
+verification :
+.\venv\Scripts\python.exe -m pip list 
+Package            Version
+------------------ ---------
+certifi            2026.7.22
+charset-normalizer 3.5.1
+idna               3.20
+pip                26.1.2
+requests           2.34.2
+urllib3            2.8.0
 
 ### 0.4 `.gitignore`
 

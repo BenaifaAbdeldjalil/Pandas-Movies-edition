@@ -23,7 +23,7 @@ files = ["scripts/01_download.py","scripts/02_clean.py",
          "scripts/03_split.py","scripts/04_check.py",
          "src/clean.py","src/download.py","src/split.py","docs/GUIDE.md","src/__init__.py",
          "requirements.txt",".gitignore","README.md","data/raw/.gitkeep",
-         "data/interim/.gitkeep","data/final/by_departement/.gitkeep"]
+         "data/final/by_director/.gitkeep"]
 
 for fi in files:
     file = base/fi
