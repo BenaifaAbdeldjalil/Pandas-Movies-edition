@@ -5,33 +5,31 @@ from pathlib import Path
 import pandas as pd
 
 
-url="https://ghibli-api.vercel.app/api/films/2baf70d1-42bb-4437-b551-e5fed5a87abe"
-base=Path("data/raw/films_raw.json")
-max_retries=3
-response = rq.get(url, timeout=30)
-
-print(response.status_code)
 
 
+data_json=pd.read_json("data/raw/films_raw.json")
 
-for attempt in range(1, max_retries + 1):
-    try:
+df=pd.json_normalize(data_json["products"],max_level=None)
+df["meta.updatedAt"].fillna("2026-01-01")
 
-        response = rq.get(url)
-                            # Vérifier que la requête a réussi
-        print(response.raise_for_status())
-                                # Écrire directement la réponse JSON dans un fichier
-        break
-    except rq.exceptions.HTTPError as e:
-                print(f"❌ Erreur HTTP : {e}")
-    except rq.exceptions.Timeout:
-        print("❌ Délai dépassé (timeout)")
-    except rq.exceptions.RequestException as e:
-        print(f"❌ Erreur réseau : {e}")
-    except OSError as e:
-        print(f"❌ Erreur d'écriture fichier : {e}")
-        break
-else:
-    raise RuntimeError(
-        f"Échec de la récupération après {max_retries} tentatives"
-    )
+#df=df.drop_duplicates(subset="id",keep=keep)
+#df=df.dropna(inplace=True)
+
+print(df.columns)
+
+liste = ['brand', 'sku', 'weight',
+       'warrantyInformation', 'shippingInformation', 
+       'reviews', 'returnPolicy',  'images',
+       'thumbnail', 'dimensions.width', 'dimensions.height',
+       'dimensions.depth', 'meta.updatedAt', 'meta.barcode',
+       'meta.qrCode']
+
+df=df.drop(columns=liste)
+
+df["create_month"] = pd.to_datetime(
+                        df["meta.createdAt"],
+                        utc=True,
+                        errors="coerce"
+                    ).dt.strftime("%Y-%m")
+
+print(df)
