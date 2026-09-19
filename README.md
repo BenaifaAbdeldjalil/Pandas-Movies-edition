@@ -1,35 +1,35 @@
-# Movies Data Pipeline
+# Ghibli Data Pipeline
 
-A small Python/pandas pipeline that fetches popular movies from the [TMDb
-API](https://www.themoviedb.org/), cleans the data, and exports it into a
-reusable folder structure (raw → processed → split by year).
+A small Python/pandas pipeline that fetches all Studio Ghibli films from
+the free, no-auth [Ghibli API](https://ghibli-api.vercel.app/), cleans the
+data, and exports it into a reusable folder structure (raw → processed →
+split by director).
 
 Built as a practice project (TP) to get comfortable with `requests` +
-`pandas`: pagination, dtype cleaning, nullable integers, and a simple
-raw/processed/final data pipeline layout.
+`pandas`: dtype cleaning, nullable integers, flattening nested list fields,
+and a simple raw/processed/final data pipeline layout — no API key needed.
 
 ---
 
 ## Project structure
 
 ```
-movies-data-pipeline/
+ghibli-data-pipeline/
 ├── data/
-│   ├── raw/               # untouched API responses (gitignored)
-│   ├── processed/         # cleaned CSV + Parquet (gitignored)
+│   ├── raw/                  # untouched API response (gitignored)
+│   ├── processed/            # cleaned CSV + Parquet (gitignored)
 │   └── final/
-│       └── by_year/       # one CSV per release year
+│       └── by_director/       # one CSV per director
 ├── src/
-│   ├── download.py        # fetch_all_pages(), save_raw()
-│   ├── clean.py            # clean_movies(), save_clean()
-│   └── split.py             # split_by_group()
+│   ├── download.py            # fetch_films(), save_raw()
+│   ├── clean.py                 # clean_films(), save_clean()
+│   └── split.py                  # split_by_group()
 ├── scripts/
-│   ├── 01_download.py     # calls src/download.py, writes data/raw/
-│   ├── 02_clean.py         # calls src/clean.py, writes data/processed/
-│   ├── 03_split.py          # calls src/split.py, writes data/final/by_year/
-│   └── 04_check.py          # sanity checks on the final output
+│   ├── 01_download.py         # calls src/download.py, writes data/raw/
+│   ├── 02_clean.py             # calls src/clean.py, writes data/processed/
+│   ├── 03_split.py              # calls src/split.py, writes data/final/by_director/
+│   └── 04_check.py              # sanity checks on the final output
 ├── requirements.txt
-├── .env                     # TMDB_API_KEY (not committed)
 └── .gitignore
 ```
 
@@ -40,25 +40,19 @@ numbered programs that run them in order — one script per pipeline step.
 
 ## Data source
 
-- API: [TMDb](https://www.themoviedb.org/documentation/api) — `GET /movie/popular`
-- Fields kept: `id`, `title`, `release_date`, `genre_ids`,
-  `original_language`, `vote_average`, `vote_count`, `popularity`
-- ~200 movies by default (10 pages × 20 results)
+- API: [Studio Ghibli API](https://ghibli-api.vercel.app/) — `GET /api/films`
+- **No authentication required** — single request returns all 22 films.
+- Fields kept: `id`, `title`, `original_title`, `director`, `producer`,
+  `release_date`, `running_time`, `rt_score`, plus character/species/
+  location/vehicle counts derived from the nested list fields.
 
 ---
 
 ## Setup
 
-### 1. Get a TMDb API key
-
-Create a free account at https://www.themoviedb.org/, then go to
-**Settings → API** and request a Developer API Read Access Token.
-
-### 2. Clone and install
-
 ```bash
-git clone https://github.com/<your-username>/movies-data-pipeline.git
-cd movies-data-pipeline
+git clone https://github.com/<your-username>/ghibli-data-pipeline.git
+cd ghibli-data-pipeline
 
 python -m venv venv
 source venv/bin/activate        # Windows: venv\Scripts\activate
@@ -66,13 +60,7 @@ source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 3. Configure your API key
-
-Create a `.env` file at the project root (already gitignored):
-
-```
-TMDB_API_KEY=your_token_here
-```
+No API key, no `.env` file needed.
 
 ---
 
@@ -81,29 +69,30 @@ TMDB_API_KEY=your_token_here
 Run the scripts in order:
 
 ```bash
-python scripts/01_download.py   # -> data/raw/movies_raw.json
-python scripts/02_clean.py      # -> data/processed/movies_clean.csv / .parquet
-python scripts/03_split.py      # -> data/final/by_year/<year>.csv
+python scripts/01_download.py   # -> data/raw/films_raw.json
+python scripts/02_clean.py      # -> data/processed/films_clean.csv / .parquet
+python scripts/03_split.py      # -> data/final/by_director/<director>.csv
 python scripts/04_check.py      # sanity checks on the whole pipeline
 ```
 
-Re-running `02_clean.py` or `03_split.py` alone is safe and won't
-re-download anything — only `01_download.py` touches the network.
+Re-running `02_clean.py` or `03_split.py` alone is safe and won't hit the
+network again — only `01_download.py` does.
 
 ---
 
 ## Output
 
-- `data/processed/movies_clean.csv` / `.parquet` — full cleaned dataset,
-  one row per movie, deduplicated on `id`, sorted by `popularity`.
-- `data/final/by_year/<year>.csv` — same columns, split by
-  `release_year`.
+- `data/processed/films_clean.csv` / `.parquet` — full cleaned dataset,
+  22 rows, one per film, deduplicated on `id`, sorted by `release_date`.
+- `data/final/by_director/<director>.csv` — same columns, split by
+  `director` (e.g. `Hayao_Miyazaki.csv`, `Isao_Takahata.csv`).
 
 ---
 
 ## Notes
 
-- `data/raw/`, `data/processed/`, `venv/`, and `.env` are gitignored — only
-  code is committed, not data or secrets.
-- If you rotate or regenerate your TMDb key, just update `.env`; nothing
-  else needs to change.
+- `data/raw/` and `data/processed/` are gitignored — only code is
+  committed, not generated data.
+- Since the dataset is tiny (22 rows), this project is meant to practice
+  the *shape* of a real pipeline (raw → clean → split → verify), not to
+  handle "big data" volumes.
