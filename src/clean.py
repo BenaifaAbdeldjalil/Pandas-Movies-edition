@@ -25,4 +25,10 @@ def rename_column (df)-> pd.DataFrame:
             'meta.updatedAt' :'dt_update'}
     return (df.rename(columns=column))
 
+def convert_date (df)-> pd.DataFrame:
+    column=['dt_creation', 'dt_update']
+    for i in column:
+        s= pd.to_datetime(df[i],format="ISO8601",utc=True, errors="coerce")
+        df[i]=(s.dt.year * 10000 + s.dt.month * 100 + s.dt.day).astype("Int64")
+    return (df)
 
