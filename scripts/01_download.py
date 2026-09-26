@@ -10,4 +10,4 @@ base=Path("data/raw/films_raw.json")
 
 films = fetch_data(url)
 save_data(data=films,path=base)
-print(f"Saved {len(films.headers)} films.")
+# print(f"Saved {len(films.headers)} films.")

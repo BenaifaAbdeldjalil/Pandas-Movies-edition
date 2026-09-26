@@ -33,3 +33,13 @@ df["create_month"] = pd.to_datetime(
                     ).dt.strftime("%Y-%m")
 
 print(df)
+
+for i,value in df["availabilityStatus"]:
+    if i == 'In Stock':
+        df["vendu"]='tre vendu'
+    else:
+        'rien'
+
+
+
+print(df)
