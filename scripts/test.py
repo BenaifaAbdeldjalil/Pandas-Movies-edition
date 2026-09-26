@@ -45,3 +45,7 @@ def convert_date (df)-> pd.DataFrame:
     return (df)
 print(convert_date(df))
 
+def duplicate_data(df)-> pd.DataFrame:
+    df.drop_duplicates(subset=["title","category"])
+    return (df)
+

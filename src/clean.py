@@ -32,3 +32,8 @@ def convert_date (df)-> pd.DataFrame:
         df[i]=(s.dt.year * 10000 + s.dt.month * 100 + s.dt.day).astype("Int64")
     return (df)
 
+
+def duplicate_data(df)-> pd.DataFrame:
+    df.drop_duplicates(subset=["title","category"])
+    return (df)
+
