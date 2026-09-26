@@ -4,42 +4,34 @@ import json
 from pathlib import Path
 import pandas as pd
 
+def load_data(path : Path):
+    with open(path,"r",encoding="utf-8") as f:
+        data=json.load(f)
+    #df=pd.json_normalize(data["products"][0],max_level=None)
+    return pd.json_normalize(data["products"], max_level=None)
+f = "data/raw/films_raw.json"
+df=load_data(path=f)
 
-
-
-data_json=pd.read_json("data/raw/films_raw.json")
-
-df=pd.json_normalize(data_json["products"],max_level=None)
-df["meta.updatedAt"].fillna("2026-01-01")
-
-#df=df.drop_duplicates(subset="id",keep=keep)
-#df=df.dropna(inplace=True)
 
 print(df.columns)
+df.rename
+def remouve_column(df )-> pd.DataFrame:
+    df=df
+    column=['sku', 'weight','warrantyInformation', 'shippingInformation', 'availabilityStatus',
+       'reviews', 'returnPolicy', 'images','thumbnail', 'meta.barcode','meta.qrCode']
+    df=df.drop(columns=column)
+    return(df)
+print(remouve_column(df).columns)
+df=remouve_column(df)
+def rename_column (df)-> pd.DataFrame:
+    column={'discountPercentage':'discount',
+            'dimensions.width' :'dimensions_width' , 
+            'dimensions.height':'dimensions_height', 
+            'dimensions.depth' : 'dimensions_depth',
+            'meta.createdAt' : 'dt_creation', 
+            'meta.updatedAt' :'dt_update'}
+    #df = df.rename(columns=column)
+    return (df.rename(columns=column))
 
-liste = ['brand', 'sku', 'weight',
-       'warrantyInformation', 'shippingInformation', 
-       'reviews', 'returnPolicy',  'images',
-       'thumbnail', 'dimensions.width', 'dimensions.height',
-       'dimensions.depth', 'meta.updatedAt', 'meta.barcode',
-       'meta.qrCode']
-
-df=df.drop(columns=liste)
-
-df["create_month"] = pd.to_datetime(
-                        df["meta.createdAt"],
-                        utc=True,
-                        errors="coerce"
-                    ).dt.strftime("%Y-%m")
-
-print(df)
-
-for i,value in df["availabilityStatus"]:
-    if i == 'In Stock':
-        df["vendu"]='tre vendu'
-    else:
-        'rien'
-
-
-
-print(df)
+df=rename_column(df)
+print(rename_column(df).columns)
