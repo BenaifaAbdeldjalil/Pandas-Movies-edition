@@ -1,4 +1,4 @@
-# TP — Build a Python/Pandas Pipeline for Public Data (Studio Ghibli edition)
+# TP — Build a Python/Pandas Pipeline for Public Data 
 
 **Goal:** practice fetching public data from an API, cleaning it with pandas,
 and exporting it into a clean, reusable folder structure — using the
@@ -20,7 +20,7 @@ returns all 22 Studio Ghibli films as JSON in one single request.
 ### 0.1 Create the GitHub repo
 
 ```bash
-git clone https://github.com/<your-username>/ghibli-data-pipeline.git
+git clone https://github.com/<your-username>/Pandas-Movies-edition.git
 cd ghibli-data-pipeline
 code .
 ```
@@ -28,7 +28,7 @@ code .
 ### 0.2 Project skeleton
 
 ```
-pandas-products-pipeline/
+Pandas-Movies-edition/
 ├── data/
 │   ├── raw/
 │   ├── processed/
