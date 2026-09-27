@@ -32,6 +32,12 @@ def convert_date (df)-> pd.DataFrame:
         df[i]=(s.dt.year * 10000 + s.dt.month * 100 + s.dt.day).astype("Int64")
     return (df)
 
+def convert_data(df)-> pd.DataFrame:
+    column=['price', 'dimensions_width','dimensions_height','dimensions_depth']
+    for i in column:
+        df[i]= pd.to_numeric(df[i], errors="coerce")
+    return (df)
+
 
 def duplicate_data(df)-> pd.DataFrame:
     df.drop_duplicates(subset=["title","category"])
@@ -42,5 +48,6 @@ def cleaning_data(path:Path)-> pd.DataFrame:
     df = remouve_column(df)
     df = rename_column (df)
     df = convert_date (df)
+    df=convert_data(df)
     df = duplicate_data(df)
     return (df)
