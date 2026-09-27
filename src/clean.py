@@ -37,3 +37,10 @@ def duplicate_data(df)-> pd.DataFrame:
     df.drop_duplicates(subset=["title","category"])
     return (df)
 
+def cleaning_data(path:Path)-> pd.DataFrame:
+    df = load_data(path)
+    df = remouve_column(df)
+    df = rename_column (df)
+    df = convert_date (df)
+    df = duplicate_data(df)
+    return (df)
