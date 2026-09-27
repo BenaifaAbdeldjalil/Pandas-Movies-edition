@@ -3,11 +3,11 @@
 import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parents[1]))
+from src.split import split
 
-from src.split import cleaning_data
+input = Path("data/processed/films_clean.csv")
+output = Path("data/final")
 
-base=Path("data/raw/films_raw.json")
 
-clean_data = cleaning_data(base)
-print(clean_data)
-# print(f"Saved {len(films.headers)} films.")
+split(input,output)
+

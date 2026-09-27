@@ -1,0 +1,16 @@
+id,title,description,category,price,discount,rating,stock,tags,brand,minimumOrderQuantity,dimensions_width,dimensions_height,dimensions_depth,dt_creation,dt_update
+16,Apple,"Fresh and crisp apples, perfect for snacking or incorporating into various recipes.",groceries,1.99,12.62,4.19,8,['fruits'],,7,13.66,11.01,9.73,20260303,20260421
+17,Beef Steak,"High-quality beef steak, great for grilling or cooking to your preferred level of doneness.",groceries,12.99,9.61,4.47,86,['meat'],,43,18.9,5.77,18.57,20241002,20251024
+18,Cat Food,Nutritious cat food formulated to meet the dietary needs of your feline friend.,groceries,8.99,9.58,3.13,46,"['pet supplies', 'cat food']",,18,18.08,9.26,21.86,20250218,20260816
+19,Chicken Meat,"Fresh and tender chicken meat, suitable for various culinary preparations.",groceries,9.99,13.7,3.19,97,['meat'],,22,11.03,22.11,16.01,20260215,20260315
+20,Cooking Oil,"Versatile cooking oil suitable for frying, sautéing, and various culinary applications.",groceries,4.99,9.33,4.8,10,['cooking essentials'],,46,19.95,27.54,24.86,20250925,20251210
+21,Cucumber,"Crisp and hydrating cucumbers, ideal for salads, snacks, or as a refreshing side.",groceries,1.49,0.16,4.07,84,['vegetables'],,2,12.8,28.38,21.34,20250112,20250307
+22,Dog Food,Specially formulated dog food designed to provide essential nutrients for your canine companion.,groceries,10.99,10.27,4.55,71,"['pet supplies', 'dog food']",,43,16.93,27.15,9.29,20250710,20260515
+23,Eggs,"Fresh eggs, a versatile ingredient for baking, cooking, or breakfast.",groceries,2.99,11.05,2.53,9,['dairy'],,32,11.42,7.44,16.95,20260206,20260820
+24,Fish Steak,"Quality fish steak, suitable for grilling, baking, or pan-searing.",groceries,14.99,4.23,3.78,74,['seafood'],,50,14.95,26.31,11.27,20250524,20251205
+25,Green Bell Pepper,"Fresh and vibrant green bell pepper, perfect for adding color and flavor to your dishes.",groceries,1.29,0.16,3.25,33,['vegetables'],,12,15.33,26.65,14.44,20241216,20250326
+26,Green Chili Pepper,"Spicy green chili pepper, ideal for adding heat to your favorite recipes.",groceries,0.99,1.0,3.66,3,['vegetables'],,39,15.38,18.12,19.92,20250813,20260707
+27,Honey Jar,"Pure and natural honey in a convenient jar, perfect for sweetening beverages or drizzling over food.",groceries,6.99,14.4,3.97,34,['condiments'],,47,9.28,21.72,17.74,20240924,20250110
+28,Ice Cream,"Creamy and delicious ice cream, available in various flavors for a delightful treat.",groceries,5.49,8.69,3.39,27,['desserts'],,42,14.83,15.07,24.2,20251023,20251104
+29,Juice,"Refreshing fruit juice, packed with vitamins and great for staying hydrated.",groceries,3.99,12.06,3.94,50,['beverages'],,25,18.56,21.46,28.02,20260401,20260704
+30,Kiwi,"Nutrient-rich kiwi, perfect for snacking or adding a tropical twist to your dishes.",groceries,2.49,15.22,4.93,99,['fruits'],,30,19.4,18.67,17.13,20250827,20260721
