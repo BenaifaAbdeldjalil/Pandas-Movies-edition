@@ -10,7 +10,7 @@ before peeking at the hints.
 
 **Tools:** Python 3.10+, VS Code, Git/GitHub.
 
-**API used:** https://ghibli-api.vercel.app/api/films — no auth, no sign-up,
+**API used:** https://dummyjson.com/products/ — no auth, no sign-up,
 returns all 22 Studio Ghibli films as JSON in one single request.
 
 ---
