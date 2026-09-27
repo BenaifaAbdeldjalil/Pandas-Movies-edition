@@ -51,3 +51,11 @@ def cleaning_data(path:Path)-> pd.DataFrame:
     df=convert_data(df)
     df = duplicate_data(df)
     return (df)
+
+def save_data(data,path):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    data.to_csv(
+        path,
+        index=False,
+        encoding="utf-8"
+    )
