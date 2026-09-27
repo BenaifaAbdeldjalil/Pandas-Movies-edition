@@ -14,7 +14,7 @@ def remouve_column(df )-> pd.DataFrame:
     df=df
     column=['sku', 'weight','warrantyInformation', 'shippingInformation', 'availabilityStatus',
        'reviews', 'returnPolicy', 'images','thumbnail', 'meta.barcode','meta.qrCode']
-    df=df.drop(column=column)
+    df=df.drop(columns=column)
     return df
 def rename_column (df)-> pd.DataFrame:
     column={'discountPercentage':'discount',
